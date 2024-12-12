@@ -45,6 +45,12 @@ class LoginRequest(BaseModel):
 class GgookRequest(BaseModel):
     productNo: str
 
+def extract_image_urls(html_content):
+    """HTML 컨텐츠에서 이미지 URL 추출"""
+    import re
+    pattern = r'src="(https?://[^"]+)"'
+    return re.findall(pattern, html_content)
+
 @app.post("/api/scrape")
 async def scrape_url(request: UrlRequest):
     try:
@@ -164,17 +170,18 @@ async def scrape_ggook(request: GgookRequest):
                 detail=f"응답 데이터 파싱 실패: {str(e)}"
             )
             
-        # 이미지 사용 허용 여부 확인
-        if not data.get('desc', {}).get('license', {}).get('usable', False):
-            raise HTTPException(
-                status_code=403,
-                detail="이미지 사용이 허용되지 않은 상품입니다."
-            )
+        # 상품 상세 이미지 URL 추출
+        detail_images = []
+        if 'desc' in data['domeggook'] and 'contents' in data['domeggook']['desc']:
+            item_content = data['domeggook']['desc']['contents'].get('item', '')
+            detail_images = extract_image_urls(item_content)
         
-        # 상품 정보 반환
         return {
             "status": "success",
-            "data": data,
+            "data": {
+                **data,
+                "detail_images": detail_images
+            },
             "message": "도매꾹 상품 정보 조회 성공"
         }
         

@@ -1,234 +1,118 @@
-import React from "react";
-import { Paper, Typography, Box, Button } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Image";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import DownloadIcon from "@mui/icons-material/Download";
+import {
+  Box,
+  Button,
+  Dialog,
+  DialogContent,
+  Paper,
+  Typography,
+} from "@mui/material";
+import { saveAs } from "file-saver";
+import JSZip from "jszip";
+import React, { useState } from "react";
 
 export function ResultView({ data }) {
-  const handleImageDownloadPage = () => {
-    const htmlContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <title>상품 상세 정보</title>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              max-width: 1200px;
-              margin: 0 auto;
-              padding: 20px;
-              background-color: #f5f5f5;
-            }
-            .content-container {
-              background: white;
-              padding: 20px;
-              border-radius: 8px;
-              box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .image-container {
-              max-width: 800px;
-              margin: 20px auto;
-            }
-            img {
-              max-width: 100%;
-              height: auto;
-              margin: 10px 0;
-              border-radius: 4px;
-            }
-            .button-container {
-              margin: 20px 0;
-              text-align: center;
-            }
-            button {
-              padding: 10px 20px;
-              margin: 0 10px;
-              border: none;
-              border-radius: 4px;
-              background-color: #1976d2;
-              color: white;
-              cursor: pointer;
-            }
-            button:hover {
-              background-color: #1565c0;
-            }
-            .slider-container {
-              width: 100%;
-              max-width: 800px;
-              margin: 0 auto;
-            }
-            .slider-image {
-              width: 100%;
-              height: auto;
-              object-fit: contain;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="content-container">
-            <h2>이미지 갤러리</h2>
-            <div class="slider-container">
-              <div class="image-container">
-                ${Array.from(data.images || [])
-                  .map(
-                    (image) => `
-                    <img src="${image}" alt="Product" class="slider-image" />
-                  `,
-                  )
-                  .join("")}
-              </div>
-            </div>
-            <div class="button-container">
-              <button onclick="downloadAllImages()">모든 이미지 다운로드</button>
-              <button onclick="downloadAsZip()">ZIP으로 다운로드</button>
-            </div>
-          </div>
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
 
-          <script>
-            async function downloadAllImages() {
-              const images = document.getElementsByTagName('img');
-              let index = 0;
-              
-              for (const img of images) {
-                try {
-                  const response = await fetch(img.src);
-                  const blob = await response.blob();
-                  const url = window.URL.createObjectURL(blob);
-                  const a = document.createElement('a');
-                  a.href = url;
-                  a.download = 'image_' + (index + 1) + '.png';
-                  document.body.appendChild(a);
-                  a.click();
-                  window.URL.revokeObjectURL(url);
-                  document.body.removeChild(a);
-                  index++;
-                } catch (error) {
-                  console.error('이미지 다운로드 실패:', error);
-                }
-              }
-              alert('모든 이미지 다운로드가 완료되었습니다!');
-            }
+  // 상품 상세 HTML 컨텐츠 가져오기
+  const detailContent = data?.data?.domeggook?.desc?.contents?.item || "";
 
-            async function downloadAsZip() {
-              const zip = new JSZip();
-              const images = document.getElementsByTagName('img');
-              let index = 0;
-              
-              try {
-                for (const img of images) {
-                  const response = await fetch(img.src);
-                  const blob = await response.blob();
-                  zip.file('image_' + (index + 1) + '.png', blob);
-                  index++;
-                }
-                
-                const content = await zip.generateAsync({type: 'blob'});
-                const url = window.URL.createObjectURL(content);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'images.zip';
-                document.body.appendChild(a);
-                a.click();
-                window.URL.revokeObjectURL(url);
-                document.body.removeChild(a);
-                
-                alert('ZIP 파일 다운로드가 완료되었습니다!');
-              } catch (error) {
-                console.error('ZIP 파일 생성 실패:', error);
-                alert('ZIP 파일 생성 중 오류가 발생했습니다.');
-              }
-            }
-          </script>
-        </body>
-      </html>
-    `;
-
-    const newWindow = window.open();
-    newWindow.document.write(htmlContent);
-    newWindow.document.close();
+  // 이미지 URL 추출
+  const extractImageUrls = (htmlContent) => {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(htmlContent, "text/html");
+    const images = doc.getElementsByTagName("img");
+    return Array.from(images).map((img) => img.src);
   };
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-    arrows: true,
-    autoplay: false,
+  const detailImages = extractImageUrls(detailContent);
+
+  const downloadImage = async (url, filename) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+      saveAs(blob, filename);
+    } catch (error) {
+      console.error("이미지 다운로드 실패:", error);
+    }
   };
 
-  console.log("Images data:", data.images);
+  const downloadAllImages = async () => {
+    try {
+      const zip = new JSZip();
+
+      const downloads = detailImages.map(async (url, index) => {
+        try {
+          const response = await fetch(url);
+          const blob = await response.blob();
+          zip.file(`image_${index + 1}.jpg`, blob);
+        } catch (error) {
+          console.error(`이미지 다운로드 실패 (${url}):`, error);
+        }
+      });
+
+      await Promise.all(downloads);
+      const content = await zip.generateAsync({ type: "blob" });
+      saveAs(content, "product_images.zip");
+    } catch (error) {
+      console.error("ZIP 파일 생성 실패:", error);
+    }
+  };
 
   return (
     <Paper sx={{ p: 3, mt: 3 }}>
-      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-        <Typography variant="h6">스크래핑 결과</Typography>
+      {/* 기본 정보 표시 */}
+      <Typography variant="h6" gutterBottom>
+        상품 정보
+      </Typography>
+
+      {/* 상품 상세정보 버튼 */}
+      <Box sx={{ mt: 2, mb: 2 }}>
         <Button
           variant="contained"
-          startIcon={<DownloadIcon />}
-          onClick={handleImageDownloadPage}
+          onClick={() => setIsDetailOpen(true)}
+          sx={{ mr: 2 }}
         >
-          상세 정보 보기
+          상품 상세정보 보기
         </Button>
+        {detailImages.length > 0 && (
+          <Button
+            variant="outlined"
+            startIcon={<DownloadIcon />}
+            onClick={downloadAllImages}
+          >
+            전체 이미지 다운로드
+          </Button>
+        )}
       </Box>
 
-      {data.html && (
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 2 }}>
-            이미지 미리보기
-          </Typography>
+      {/* 상세정보 다이얼로그 */}
+      <Dialog
+        open={isDetailOpen}
+        onClose={() => setIsDetailOpen(false)}
+        maxWidth="lg"
+        fullWidth
+      >
+        <DialogContent>
           <Box
             sx={{
-              maxWidth: "800px",
-              margin: "0 auto",
-              "& .slick-prev, & .slick-next": {
-                zIndex: 1,
-                "&:before": {
-                  color: "#000",
-                },
+              "& img": {
+                maxWidth: "100%",
+                height: "auto",
+                display: "block",
+                margin: "10px auto",
               },
-              "& .slick-prev": { left: 10 },
-              "& .slick-next": { right: 10 },
             }}
           >
-            <Slider {...sliderSettings}>
-              {Array.from(
-                new DOMParser()
-                  .parseFromString(data.html, "text/html")
-                  .querySelectorAll("img"),
-              ).map((img, index) => (
-                <div key={index}>
-                  <img
-                    src={img.src}
-                    alt={`Product ${index + 1}`}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      objectFit: "contain",
-                      maxHeight: "500px",
-                    }}
-                  />
-                </div>
-              ))}
-            </Slider>
+            <div dangerouslySetInnerHTML={{ __html: detailContent }} />
           </Box>
-        </Box>
-      )}
+        </DialogContent>
+      </Dialog>
 
-      <Typography variant="subtitle1" sx={{ fontWeight: "bold", mt: 2 }}>
-        스크래핑 URL
-      </Typography>
-      <Typography>{data.url}</Typography>
-
-      <Typography variant="subtitle1" sx={{ fontWeight: "bold", mt: 2 }}>
-        스크래핑 데이터
-      </Typography>
+      {/* 기존의 JSON 데이터 표시 */}
       <Box
         sx={{
-          mt: 1,
+          mt: 2,
           p: 2,
           backgroundColor: "#f5f5f5",
           borderRadius: 1,
