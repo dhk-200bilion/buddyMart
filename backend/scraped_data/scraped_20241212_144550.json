@@ -1,0 +1,83 @@
+{
+  "url": "https://domeggook.com/37511752",
+  "timestamp": "2024-12-12T14:45:50.427728",
+  "html": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n\n<html lang=\"ko\" xml:lang=\"ko\" xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:fb=\"http://ogp.me/ns/fb#\" xmlns:og=\"http://opengraphprotocol.org/schema/\">\n<head>\n<title>도매꾹 :: 돈버는쇼핑 - 도매꾹</title>\n<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\"/>\n<meta content='CP=\"naggama\" policyref=\"/w3c/p3p.xml\"' http-equiv=\"p3p\"/>\n<meta content=\"no\" http-equiv=\"imagetoolbar\"/>\n<meta content='(PICS-1.1 \"http://www.safenet.ne.kr/rating.html\" l gen true for \"http://domeggook.com\" r (n 0 s 0 v 0 l 0 i 0 h 0))' http-equiv=\"pics-label\"/>\n<meta content=\"navyism\" name=\"generator\">\n<meta content=\"(주)지앤지커머스(https://gng.ggook.com), 도매꾹(http://domeggook.com)\" name=\"author\"/>\n<meta content=\"20년간 B2B 온라인 종합 부문 1위 사이트! 돈버는쇼핑, 도매꾹! 도매중개사이트, 최저가상품, 판촉물유통\" name=\"description\"/>\n<meta content=\"온라인 도매 전문업체,도매시장,덤핑,재고,판촉물유통,B2B 도매,땡처리,위탁판매,공동구매 안내, 도매중개 사이트,덤핑상품,브랜드제품,수입명품,할인상품 중개서비스 제공 ,...",
+  "title": "도매꾹 :: 돈버는쇼핑 - 도매꾹",
+  "forms": [
+    {
+      "action": "/main/item/itemList.php",
+      "method": "get",
+      "fields": [
+        {
+          "type": "hidden",
+          "name": "sfc",
+          "id": "",
+          "value": "ttl",
+          "required": false
+        },
+        {
+          "type": "hidden",
+          "name": "sf",
+          "id": "searchItemSf",
+          "value": "ttl",
+          "required": false
+        },
+        {
+          "type": "text",
+          "name": "sw",
+          "id": "searchWordForm",
+          "value": "",
+          "required": false
+        },
+        {
+          "type": "submit",
+          "name": "",
+          "id": "searchWordSubmit",
+          "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "action": "https://domeggook.com/main/myBuy/order/my_orderInfoForm.php",
+      "method": "GET",
+      "fields": [
+        {
+          "type": "hidden",
+          "name": "checkedItem",
+          "id": "",
+          "value": "",
+          "required": false
+        },
+        {
+          "type": "hidden",
+          "name": "reqPresentInfo",
+          "id": "",
+          "value": "",
+          "required": false
+        }
+      ]
+    },
+    {
+      "action": "/main/item/itemIng.php",
+      "method": "post",
+      "fields": [
+        {
+          "type": "hidden",
+          "name": "mode",
+          "id": "",
+          "value": "itemCom",
+          "required": false
+        },
+        {
+          "type": "hidden",
+          "name": "no",
+          "id": "",
+          "value": "37511752",
+          "required": false
+        }
+      ]
+    }
+  ],
+  "note": "일부 동적 콘텐츠(JavaScript로 로드되는 내용)는 포함되지 않을 수 있습니다."
+}
