@@ -1,0 +1,354 @@
+// 쿠팡 상품 생성 파라미터
+// URL :  https://wing.coupang.com/tenants/seller-web/vendor-inventory/saveV2
+
+{
+  "locale": "ko_KR",
+  "sellerProductId": null,
+  "displayCategoryCode": 63926,
+  "categoryId": 1843,
+  "saleAgentCommissionType": "FIXED_RATE",
+  "brand": null,
+  "bundleInfo": {
+    "bundleType": "SINGLE",
+    "discountDisabled": "true"
+  },
+  "manufacture": "홈엔호",
+  "giveawayType": null,
+  "productId": null,
+  "productOrigin": null,
+  "copiedFrom": null,
+  "contributorType": "COUPANG",
+  "sellerProductName": "젤라퐁 변기클리너 젤 변기세정제 화장실 물때클리너 소변탈취제 (라벤더 + 레몬 )",
+  "displayProductName": "젤라퐁 변기클리너 젤 변기세정제 화장실 물때클리너 소변탈취제 (라벤더+ 레몬 )",
+  "generalProductName": "젤라퐁 변기클리너 젤 변기세정제 화장실 물때클리너 소변탈취제 (라벤더+ 레몬 )",
+  "saleStartedAt": "2024-12-13T10:57:17",
+  "saleEndedAt": "2099-12-31T00:00:00",
+  "items": [
+    {
+      "id": "9674109c-7764-4121-bc02-0405aa532e03",
+      "salePrice": 15000,
+      "originalPrice": 22500,
+      "maximumBuyCount": 100,
+      "externalVendorSku": "",
+      "modelNo": "",
+      "isModelNoEmpty": false,
+      "barcode": "",
+      "itemId": null,
+      "sellerProductItemId": null,
+      "vendorItemId": null,
+      "images": [
+        {
+          "imageOrder": 0,
+          "imageType": "DETAIL",
+          "cdnPath": "vendor_inventory/40c8/cc107c078209a8fc8eaa5ea146c6069563e680d899916394e8ada391e1f4.png",
+          "vendorPath": "vendor_inventory/40c8/cc107c078209a8fc8eaa5ea146c6069563e680d899916394e8ada391e1f4.png"
+        },
+        {
+          "imageOrder": 1,
+          "imageType": "DETAIL",
+          "cdnPath": "vendor_inventory/16b8/b469dd764c8286e4331d4a24a31e091110c71043561cbda5439d5bb63374.png",
+          "vendorPath": "vendor_inventory/16b8/b469dd764c8286e4331d4a24a31e091110c71043561cbda5439d5bb63374.png"
+        },
+        {
+          "imageOrder": 2,
+          "imageType": "DETAIL",
+          "cdnPath": "vendor_inventory/f20d/f940c160913f2174ad68fe851fe4d88d61da0952f73aecf8233cb68cc94a.png",
+          "vendorPath": "vendor_inventory/f20d/f940c160913f2174ad68fe851fe4d88d61da0952f73aecf8233cb68cc94a.png"
+        },
+        {
+          "imageOrder": 0,
+          "imageType": "REPRESENTATION",
+          "cdnPath": "vendor_inventory/0d72/b30782b37ecdc8796eeaaa1bb9754fde78c5fc599644bb48a0fe212f8313.png",
+          "vendorPath": "vendor_inventory/0d72/b30782b37ecdc8796eeaaa1bb9754fde78c5fc599644bb48a0fe212f8313.png"
+        }
+      ],
+      "offerCondition": "NEW",
+      "offerDescription": "",
+      "productOrigin": null,
+      "contents": [
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/633e/d8664be5f701478f3e996ef760bf2d027355d7ddba674b7aecaa33981249.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/9546/a8be9491333c9d69f0d5fb22344cc80befdc7d95e027cc30de256a43fc3d.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/b293/a72bb2316017f51b5ee86a395e8b7de1b1ad15b9f32b00804680ec15c553.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/6951/c07d7d6f0b67a401627f3b229cdbdfcf4c83f65301135443db9025e171e2.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/1e6a/0439f3e4ac8c5c59e49b868a7c17094acf7389da7f6b528c185a2c8d3d62.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/f43d/0cbcd58bc53d0fb41b74c05966c01d1bbce8af54397172739e45345c5be5.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/52e2/88c676887e78e51164ef4f2860e9ada180a8d3d6daa55ab7dae04b87ef83.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/d991/e0b0d06e184ea2c338e0cbcea61a02ba576ad7e92b1f78f340911ff3c41e.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/b2a5/d838025004582a5315da183364fdba1e76c45e66a09779207e3c6d143c75.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/6b4a/c8a9bc4e3389ba5a6c13875ffafbc2e997a8a112544a5e5241118d536393.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/09fe/3ad7eea5485e5d2e716222a7fce41983787620273abd66f91d9a6303871c.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/0607/d530b141e48c7faa591cf805113bc30796525126a6bfff1d431dd49b04d3.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/ac52/18855e16b932935cd7004704d3fc800d7170dd3d78642a9282918361f412.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/0653/80e77798994de2f56550cbe5e302245fc03f22919e7ed60237a6ccaf4cb8.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/e45d/e075e0884c89af131a97e22e0f3ec4e2eedca4906807cae87f6f1ed349b9.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        },
+        {
+          "contentsType": "IMAGE_NO_SPACE",
+          "contentDetails": [
+            {
+              "content": "vendor_inventory/e63f/0aeae014ab2037a217c69efb20de3403d305cb081086b93f814f69101d89.jpg",
+              "detailType": "IMAGE",
+              "altText": ""
+            }
+          ]
+        }
+      ],
+      "registrationType": "NORMAL",
+      "skuInfo": null,
+      "skuChecked": false,
+      "outboundShippingTimeDay": "3",
+      "sameDayShipping": null,
+      "upBundlingInfo": null,
+      "originalVendorItemId": null,
+      "globalInfo": null,
+      "emptyBarcodeReason": "COUPANG",
+      "autoPricingInfo": {
+        "minSalePrice": 14250,
+        "maxSalePrice": 15000,
+        "active": true,
+        "enableRecommendation": true,
+        "defaultAutoPricingMinPrice": null,
+        "defaultAutoPricingMaxPrice": null
+      },
+      "internalAttributes": [],
+      "itemName": "50g 1세트",
+      "attributes": [
+        {
+          "editable": false,
+          "attributeTypeId": 7637,
+          "attributeTypeName": "개당 중량",
+          "attributeValueName": "50g",
+          "exposed": "EXPOSED"
+        },
+        {
+          "editable": false,
+          "attributeTypeId": 7652,
+          "attributeTypeName": "수량",
+          "attributeValueName": "1세트",
+          "exposed": "EXPOSED"
+        }
+      ],
+      "saleAgentCommission": 7.8,
+      "notices": [
+        {
+          "noticeCategoryName": "기타 재화",
+          "noticeCategoryDetailName": "품명 및 모델명",
+          "content": "상품 상세페이지 참조"
+        },
+        {
+          "noticeCategoryName": "기타 재화",
+          "noticeCategoryDetailName": "인증/허가 사항",
+          "content": "상품 상세페이지 참조"
+        },
+        {
+          "noticeCategoryName": "기타 재화",
+          "noticeCategoryDetailName": "제조국(원산지)",
+          "content": "상품 상세페이지 참조"
+        },
+        {
+          "noticeCategoryName": "기타 재화",
+          "noticeCategoryDetailName": "제조자(수입자)",
+          "content": "상품 상세페이지 참조"
+        },
+        {
+          "noticeCategoryName": "기타 재화",
+          "noticeCategoryDetailName": "소비자상담 관련 전화번호",
+          "content": "상품 상세페이지 참조"
+        }
+      ],
+      "maximumBuyForPerson": 0,
+      "maximumBuyForPersonPeriod": 1,
+      "certifications": [
+        {
+          "certificationType": "NOT_REQUIRED",
+          "certificationCode": ""
+        }
+      ],
+      "taxType": "TAX",
+      "adultOnly": "EVERYONE",
+      "parallelImported": "NOT_PARALLEL_IMPORTED",
+      "pccNeeded": false,
+      "searchTags": [
+        "젤라퐁",
+        "변기클리너",
+        "변기세정제",
+        "물때클리너",
+        "박테리아클리너",
+        "소변탈취제"
+      ],
+      "overseasPurchased": "NOT_OVERSEAS_PURCHASED",
+      "unitCount": 1
+    }
+  ],
+  "requiredDocuments": [],
+  "deliveryMethod": "SEQUENCIAL",
+  "deliveryCompanyCode": "CJGLS",
+  "deliveryChargeType": "FREE",
+  "deliveryCharge": 0,
+  "freeShipOverAmount": 0,
+  "remoteAreaDeliverable": "N",
+  "unionDeliveryType": "NOT_UNION_DELIVERY",
+  "outboundShippingPlaceCode": "21742655",
+  "extraInfoMessage": "",
+  "returnCenterCode": "1002047241",
+  "returnChargeName": "반품지2차",
+  "companyContactNumber": "010-6626-5795",
+  "returnZipCode": "34199",
+  "returnAddress": "대전광역시 유성구 상대동로36번길 61-16",
+  "returnAddressDetail": "201호",
+  "returnCharge": 3000,
+  "deliveryChargeOnReturn": 3000,
+  "metaData": {
+    "SALE_PERIOD_SELECTION_TYPE": "NOT_SET",
+    "CONTENT_UI_REGISTRATION_LEVEL_TYPE": "INVENTORY",
+    "IMAGE_UI_REGISTRATION_TYPE": "PRODUCT",
+    "MAXIMUM_PURCHASE_SELECTION_TYPE": "NOT_SET",
+    "CATEGORY_USE_TYPE": "COPY",
+    "CONTENT_UI_REGISTRATION_TYPE": "IMAGE",
+    "SKU_INFO_UI_REGISTRATION_TYPE": "PRODUCT",
+    "IS_SINGLE_OPTION_PRODUCT": "TRUE",
+    "OUTBOUND_SHIPPING_TIME_SELECTION_TYPE": "NOT_SET",
+    "USED_PRODUCT_SELECTION_TYPE": "NONE",
+    "VERSION": "2",
+    "UP_BUNDLING_OPT_STATUS": "false"
+  },
+  "inspectionData": null,
+  "registrationType": "NORMAL",
+  "progressiveDiscountRuleDtos": [],
+  "requested": true,
+  "roleCode": 2
+}

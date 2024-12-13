@@ -1,0 +1,227 @@
+{
+  "status": "success",
+  "data": {
+    "domeggook": {
+      "basis": {
+        "no": 47854219,
+        "status": "판매중",
+        "title": "맑은소리 자전거 벨 경적 따르릉 종 색상랜덤",
+
+        "keywords": {
+          "kw": [
+            "경적벨",
+            "따르릉벨",
+            "안전벨",
+            "자전거종",
+            "클락션",
+            "크락션",
+            "자전거라이트",
+            "자전거링벨"
+          ]
+        },
+        "section": "직접판매",
+        "nego": "enable",
+        "adult": "false",
+        "dateStart": "2024-10-03 00:00:00",
+        "dateEnd": "2025-01-01 18:34:00",
+        "dateReg": "2024-07-05 18:34:04",
+        "tax": "과세상품"
+      },
+      "price": {
+        "dome": "480",
+        "supply": 490
+      },
+      "qty": {
+        "inventory": "999",
+        "domeMoq": "11",
+        "domeUnit": 1,
+        "supplyUnit": 1
+      },
+      "deli": {
+        "method": "택배",
+        "pay": "선결제",
+        "dome": {
+          "type": "고정배송비",
+          "fee": "3000"
+        },
+        "supply": {
+          "type": "고정배송비",
+          "fee": "3000"
+        },
+        "wating": "즉시배송가능",
+        "periodDeli": "0",
+        "sendAvg": "0.3",
+        "fastDeli": "true",
+        "merge": {
+          "enable": "y"
+        },
+        "shippingArea": "58673",
+        "feeExtra": {
+          "jeju": "3000",
+          "islands": "6000",
+          "useDeliPro": "true"
+        },
+        "fromOversea": "false",
+        "reqCcno": "false"
+      },
+      "channel": {
+        "dome": "true",
+        "supply": "true"
+      },
+      "thumb": {
+        "small": "https://cdn1.domeggook.com/upload/item/2024/07/05/1720172044AAEF808CAA5ABF3EBEFC5E/1720172044AAEF808CAA5ABF3EBEFC5E_img_150?hash=4f4ddc9a3e727194c71188cc0a5a18d4",
+        "large": "https://cdn1.domeggook.com/upload/item/2024/07/05/1720172044AAEF808CAA5ABF3EBEFC5E/1720172044AAEF808CAA5ABF3EBEFC5E_img_330?hash=4f4ddc9a3e727194c71188cc0a5a18d4",
+        "original": "https://cdn1.domeggook.com/upload/item/2024/07/05/1720172044AAEF808CAA5ABF3EBEFC5E/1720172044AAEF808CAA5ABF3EBEFC5E_img_760?hash=4f4ddc9a3e727194c71188cc0a5a18d4",
+        "smallPng": "https://cdn1.domeggook.com/upload/item/2024/07/05/1720172044AAEF808CAA5ABF3EBEFC5E/1720172044AAEF808CAA5ABF3EBEFC5E_stt_150.png?hash=4f4ddc9a3e727194c71188cc0a5a18d4",
+        "largePng": "https://cdn1.domeggook.com/upload/item/2024/07/05/1720172044AAEF808CAA5ABF3EBEFC5E/1720172044AAEF808CAA5ABF3EBEFC5E_stt_330.png?hash=4f4ddc9a3e727194c71188cc0a5a18d4",
+        "hash": "701e04c2b403b8443a8b930357534b6f",
+        "lastUpdate": "2024-07-05 18:34:05"
+      },
+      "desc": {
+        "license": {
+          "usable": "true",
+          "msg": "상품설명에 사용된 이미지를 다른 곳에서 사용하는 것을 허용합니다."
+        },
+        "contents": {
+          "item": "<img src='https://gi.esmplus.com/suby8125/%EC%82%AC%EC%9E%85%ED%8C%90%EB%A7%A4/%EC%9E%90%EC%A0%84%EA%B1%B0%EB%B2%A8.jpg' />",
+          "deli": ".",
+          "event": ".",
+          "otherItem": "."
+        }
+      },
+      "seller": {
+        "id": "sub8125",
+        "nick": "키알리",
+        "type": "일반과세자",
+        "rank": "2",
+        "power": "false",
+        "good": "true",
+        "global": "false",
+        "score": {
+          "avg": "100%",
+          "cnt": 7
+        },
+        "company": {
+          "name": "키알리",
+          "boss": "박영신",
+          "cno": "419-55-00505",
+          "addr": "경기 용인시 수지구 현암로 108 (죽전동, 삼성프라자) 4층 403호",
+          "phone": "010-5646-1387"
+        }
+      },
+      "benefits": {
+        "sellerPoint": {
+          "type": "none"
+        }
+      },
+      "detail": {
+        "size": "100",
+        "weight": "0.1",
+        "country": "수입산_아시아_중국",
+        "manufacturer": "중국업체",
+        "model": "해당없음",
+        "oversea": "true",
+        "itemCustomCode": "K195",
+        "infoDuty": {
+          "type": "기타 재화",
+          "item": [
+            {
+              "type": "item",
+              "name": "품명 및 모델명",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "item",
+              "name": "법에 의한 인증·허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "item",
+              "name": "제조국 또는 원산지",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "item",
+              "name": "제조사",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "item",
+              "name": "A/S 책임자와 전화번호 또는 소비자상담 관련 전화번호",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "transaction",
+              "name": "청약철회 및 계약의 해제에 관한 사항",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "transaction",
+              "name": "재화 등의 교환/반품/보증과 그 대금 환불 및 환불의 지연에 따른 배상급 지급의 조건/절차",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "transaction",
+              "name": "소비자피해보상의 처리, 재화 등에 대한 불만 처리 및 소비자와 사업자 사이의 분쟁처리에 관한 사항",
+              "desc": "상세정보 별도표기"
+            },
+            {
+              "type": "transaction",
+              "name": "거래에 관한 약관의 내용 또는 확인할 수 있는 방법",
+              "desc": "상세정보 별도표기"
+            }
+          ]
+        }
+      },
+      "category": {
+        "parents": {
+          "elem": [
+            {
+              "name": "스포츠/레저",
+              "code": "14_00_00_00_00",
+              "depth": 1
+            },
+            {
+              "name": "자전거",
+              "code": "14_18_00_00_00",
+              "depth": 2
+            },
+            {
+              "name": "자전거용품",
+              "code": "14_18_03_00_00",
+              "depth": 3
+            }
+          ]
+        },
+        "current": {
+          "name": "벨",
+          "code": "14_18_03_06_00",
+          "depth": 4
+        }
+      },
+      "return": {
+        "addr": {
+          "no": "58673",
+          "zipcode": "16880",
+          "address1": "경기 용인시 수지구 현암로 108 (죽전동, 삼성프라자)",
+          "address2": "403호 키알리",
+          "phone": "",
+          "mobile": "010-5646-1387"
+        },
+        "deliAmt": 3000,
+        "deliAmtDouble": "true"
+      },
+      "event": {
+        "join": "",
+        "packDeli": "false"
+      },
+      "etc": {
+        "showByMailzine": "false",
+        "connectStompApi": "false",
+        "denyMarket": "false"
+      }
+    },
+    "detail_images": []
+  },
+  "message": "도매꾹 상품 정보 조회 성공"
+}

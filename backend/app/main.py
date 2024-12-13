@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from pydantic import BaseModel, HttpUrl
 from app.scraper import WebScraper
 import os
@@ -10,6 +10,10 @@ from datetime import datetime
 from urllib.parse import urlparse
 import logging
 from dotenv import load_dotenv
+import aiohttp
+import io
+from typing import Optional
+import asyncio
 
 # .env 파일 로드
 load_dotenv()
@@ -190,4 +194,52 @@ async def scrape_ggook(request: GgookRequest):
         raise HTTPException(
             status_code=500,
             detail=f"처리 중 오류 발생: {str(e)}"
+        )
+
+@app.get("/api/proxy-image")
+async def proxy_image(url: str, timeout: Optional[int] = 60):
+    try:
+        # 타임아웃 설정을 포함한 클라이언트 세션 설정
+        timeout_config = aiohttp.ClientTimeout(total=timeout)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+        
+        async with aiohttp.ClientSession(timeout=timeout_config) as session:
+            try:
+                async with session.get(url, headers=headers) as response:
+                    if response.status == 200:
+                        content_type = response.headers.get('content-type', 'image/jpeg')
+                        if not any(img_type in content_type.lower() for img_type in ['image/jpeg', 'image/png', 'image/gif']):
+                            raise HTTPException(status_code=400, detail="유효하지 않은 이미지 형식입니다")
+                        
+                        content = await response.read()
+                        return StreamingResponse(
+                            io.BytesIO(content), 
+                            media_type=content_type,
+                            headers={
+                                'Cache-Control': 'public, max-age=31536000',
+                                'Access-Control-Allow-Origin': '*'
+                            }
+                        )
+                    else:
+                        raise HTTPException(
+                            status_code=response.status,
+                            detail=f"이미지 다운로드 실패: HTTP {response.status}"
+                        )
+            except asyncio.TimeoutError:
+                raise HTTPException(
+                    status_code=504,
+                    detail="이미지 다운로드 시간이 초과되었습니다"
+                )
+            except aiohttp.ClientError as e:
+                raise HTTPException(
+                    status_code=502,
+                    detail=f"이미지 서버 연결 오류: {str(e)}"
+                )
+    except Exception as e:
+        logger.error(f"이미지 프록시 오류: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"이미지 프록시 처리 중 오류 발생: {str(e)}"
         )
