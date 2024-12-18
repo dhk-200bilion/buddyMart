@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import DownloadIcon from "@mui/icons-material/Download";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import PriceCheckIcon from "@mui/icons-material/PriceCheck";
+import VerifiedIcon from "@mui/icons-material/Verified";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Chip,
-  Grid,
-  Typography,
-  Button,
   Divider,
+  Grid,
   Snackbar,
+  Typography,
 } from "@mui/material";
-import DownloadIcon from "@mui/icons-material/Download";
-import VerifiedIcon from "@mui/icons-material/Verified";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import PriceCheckIcon from "@mui/icons-material/PriceCheck";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { saveAs } from "file-saver";
+import React, { useState } from "react";
 
 export function ProductDetailView({ data }) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -36,7 +36,15 @@ export function ProductDetailView({ data }) {
 
   const downloadThumbnail = async (url, filename) => {
     try {
-      const response = await fetch(url);
+      const proxyUrl = `http://localhost:8000/api/proxy-image?url=${encodeURIComponent(
+        url
+      )}`;
+      const response = await fetch(proxyUrl);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       const blob = await response.blob();
       saveAs(blob, filename);
     } catch (error) {
@@ -66,7 +74,7 @@ export function ProductDetailView({ data }) {
                   onClick={() =>
                     downloadThumbnail(
                       product.thumb.original,
-                      `thumbnail_${product.basis.no}.jpg`,
+                      `thumbnail_${product.basis.no}.jpg`
                     )
                   }
                 >
@@ -76,7 +84,7 @@ export function ProductDetailView({ data }) {
             </Box>
           </Grid>
 
-          {/* 상품 정보 */}
+          {/* 상품 정��� */}
           <Grid item xs={12} md={8}>
             <Typography variant="h5" gutterBottom>
               {product.basis.title}
