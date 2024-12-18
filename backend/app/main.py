@@ -390,14 +390,14 @@ async def search_coupang(request: CoupangSearchRequest):
                     # 상품 정보 추출
                     title_element = product.find_element(By.CSS_SELECTOR, "div.name")
                     price_element = product.find_element(By.CSS_SELECTOR, "strong.price-value")
+                    
+                    # 링크 추출 수정
                     link_element = product.find_element(By.CSS_SELECTOR, "a.search-product-link")
+                    product_link = link_element.get_attribute("href")
                     
-                    # 상품 ID와 vendor ID 추출
-                    product_id = link_element.get_attribute("data-product-id")
-                    vendor_item_id = link_element.get_attribute("data-vendor-item-id")
-                    
-                    # 올바른 상품 링크 생성
-                    product_link = f"https://www.coupang.com/vp/products/{product_id}?vendorItemId={vendor_item_id}"
+                    # 상품 링크가 상대 경로인 경우 절대 경로로 변환
+                    if product_link.startswith("/"):
+                        product_link = f"https://www.coupang.com{product_link}"
                     
                     # 이미지 URL 추출
                     try:
