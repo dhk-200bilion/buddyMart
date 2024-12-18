@@ -15,6 +15,19 @@ import io
 from typing import Optional
 import asyncio
 import ssl
+import hmac
+import hashlib
+import time
+import urllib.parse
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
+from fake_useragent import UserAgent
+from pyppeteer import launch
 
 # .env 파일 로드
 load_dotenv()
@@ -49,6 +62,16 @@ class LoginRequest(BaseModel):
 # 도매꾹 API 요청을 위한 Pydantic 모델
 class GgookRequest(BaseModel):
     productNo: str
+
+# 네이버 쇼핑 API 설정 추가
+NAVER_CLIENT_ID = "네이버_클라이언트_ID"
+NAVER_CLIENT_SECRET = "네이버_클라이언트_시크릿"
+
+class NaverSearchRequest(BaseModel):
+    keyword: str
+
+class CoupangSearchRequest(BaseModel):
+    keyword: str
 
 def extract_image_urls(html_content):
     """HTML 컨텐츠에서 이미지 URL 추출"""
@@ -232,7 +255,7 @@ async def proxy_image(url: str, timeout: Optional[int] = 60):
                         if not ext:
                             ext = '.jpg'  # 기본 확장자
                             
-                        # Content-Type 결정
+                        # Content-Type 정
                         content_type = response.headers.get('content-type', '')
                         if not content_type or 'image' not in content_type.lower():
                             content_type = f'image/{ext[1:]}' if ext != '.jpg' else 'image/jpeg'
@@ -274,4 +297,139 @@ async def proxy_image(url: str, timeout: Optional[int] = 60):
         raise HTTPException(
             status_code=500,
             detail=f"이미지 프록시 처리 중 오류 발생: {str(e)}"
+        )
+
+@app.post("/api/search/shopping")
+async def search_shopping(request: NaverSearchRequest):
+    try:
+        headers = {
+            "X-Naver-Client-Id": NAVER_CLIENT_ID,
+            "X-Naver-Client-Secret": NAVER_CLIENT_SECRET
+        }
+        
+        encoded_keyword = urllib.parse.quote(request.keyword)
+        url = f"https://openapi.naver.com/v1/search/shop.json?query={encoded_keyword}&display=10"
+        
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, headers=headers) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    return JSONResponse({
+                        "status": "success",
+                        "data": data
+                    })
+                else:
+                    error_msg = await response.text()
+                    logger.error(f"네이버 쇼핑 API 오류: {error_msg}")
+                    raise HTTPException(
+                        status_code=response.status,
+                        detail=f"네이버 쇼핑 API 요청 실패: {error_msg}"
+                    )
+                    
+    except Exception as e:
+        logger.error(f"쿠핑 검색 처리 중 오류 발생: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"쿠핑 검색 처리 중 오류 발생: {str(e)}"
+        )
+
+@app.post("/api/search/coupang")
+async def search_coupang(request: CoupangSearchRequest):
+    try:
+        # Chrome 옵션 설정
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')  # 백그라운드 실행
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        chrome_options.add_argument('--window-size=1920,1080')
+        chrome_options.add_argument('--disable-gpu')
+        
+        # User-Agent 설정
+        ua = UserAgent()
+        chrome_options.add_argument(f'user-agent={ua.random}')
+        
+        # 프록시 설정 (선택사항)
+        # chrome_options.add_argument('--proxy-server=프록시주소:포트')
+        
+        # WebDriver 초기화
+        service = Service()
+        driver = webdriver.Chrome(service=service, options=chrome_options)
+        
+        try:
+            # 검색 URL 생성
+            encoded_keyword = urllib.parse.quote(request.keyword)
+            base_url = "https://www.coupang.com/np/search"
+            params = {
+                'component': '',
+                'q': request.keyword,
+                'channel': 'user'
+            }
+            
+            # URL 파라미터 인코딩
+            query_string = urllib.parse.urlencode(params)
+            search_url = f"{base_url}?{query_string}"
+            
+            # 페이지 로드
+            driver.get(search_url)
+            
+            # 명시적 대기 설정
+            wait = WebDriverWait(driver, 10)
+            
+            # 상품 목록이 로드될 때까지 대기
+            products_selector = "li.search-product"
+            products = wait.until(
+                EC.presence_of_all_elements_located((By.CSS_SELECTOR, products_selector))
+            )
+            
+            # 결과 저장
+            results = []
+            
+            # 상위 10개 상품만 처리
+            for product in products[:10]:
+                try:
+                    # 상품 정보 추출
+                    title_element = product.find_element(By.CSS_SELECTOR, "div.name")
+                    price_element = product.find_element(By.CSS_SELECTOR, "strong.price-value")
+                    link_element = product.find_element(By.CSS_SELECTOR, "a.search-product-link")
+                    
+                    # 상품 ID와 vendor ID 추출
+                    product_id = link_element.get_attribute("data-product-id")
+                    vendor_item_id = link_element.get_attribute("data-vendor-item-id")
+                    
+                    # 올바른 상품 링크 생성
+                    product_link = f"https://www.coupang.com/vp/products/{product_id}?vendorItemId={vendor_item_id}"
+                    
+                    # 이미지 URL 추출
+                    try:
+                        img_element = product.find_element(By.CSS_SELECTOR, "img.search-product-wrap-img")
+                        image_url = img_element.get_attribute("src")
+                    except:
+                        image_url = ""
+                    
+                    results.append({
+                        "title": title_element.text,
+                        "price": price_element.text,
+                        "link": product_link,
+                        "image": image_url
+                    })
+                    
+                except Exception as e:
+                    logger.warning(f"상품 정보 추출 중 오류: {str(e)}")
+                    continue
+            
+            return JSONResponse({
+                "status": "success",
+                "data": {
+                    "products": results
+                }
+            })
+            
+        finally:
+            driver.quit()
+            
+    except Exception as e:
+        logger.error(f"쿠팡 검색 처리 중 오류 발생: {str(e)}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"쿠팡 검색 처리 중 오류 발생: {str(e)}"
         )
