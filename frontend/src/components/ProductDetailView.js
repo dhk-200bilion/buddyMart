@@ -15,11 +15,17 @@ import {
   Typography,
 } from "@mui/material";
 import { saveAs } from "file-saver";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { CoupangSearchResults } from "./CoupangSearchResults";
 
 export function ProductDetailView({ data }) {
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [resetCoupangSearch, setResetCoupangSearch] = useState(0);
   const product = data?.data?.domeggook;
+
+  useEffect(() => {
+    setResetCoupangSearch((prev) => prev + 1);
+  }, [data]);
 
   if (!product) return null;
 
@@ -84,7 +90,7 @@ export function ProductDetailView({ data }) {
             </Box>
           </Grid>
 
-          {/* 상품 정��� */}
+          {/* 상품 정보 */}
           <Grid item xs={12} md={8}>
             <Typography variant="h5" gutterBottom>
               {product.basis.title}
@@ -201,6 +207,12 @@ export function ProductDetailView({ data }) {
             </Box>
           </Grid>
         </Grid>
+
+        {/* 쿠팡 검색 결과 추가 */}
+        <CoupangSearchResults
+          productTitle={product.basis.title}
+          key={resetCoupangSearch}
+        />
       </CardContent>
 
       {/* 복사 완료 알림 */}
